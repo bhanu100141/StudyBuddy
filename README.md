@@ -4,12 +4,31 @@ An intelligent learning companion that allows students to upload study materials
 
 ## Features
 
+### Core Features
 - **Authentication System**: Email/password authentication with role-based access (Student/Teacher)
 - **Material Upload**: Upload PDFs, TXT, and DOCX files (up to 10MB)
 - **AI Chat**: Context-aware chat powered by Google Gemini that references uploaded materials
-- **Chat History**: Save and manage multiple chat conversations
+- **Chat History**: Save and manage multiple chat conversations with file attachments
 - **Modern UI**: Clean, responsive interface built with Tailwind CSS
 - **Separated Architecture**: Clear separation between frontend and backend code
+
+### Student Productivity Tools
+- **📚 Course Management**: Create and organize courses with custom colors, codes, instructors, and credits
+- **📅 Schedule & Calendar**:
+  - Manage classes, assignments, exams, and tasks
+  - Set priorities (Low, Medium, High)
+  - Link events to courses
+  - Track completion status
+  - Filter by event type
+- **🎯 Focus Mode**:
+  - Pomodoro timer with customizable durations
+  - Auto-start options for breaks/focus sessions
+  - Session tracking
+  - Sound notifications
+  - Beautiful circular progress indicator
+
+### Teacher Features
+- **Teacher Dashboard**: Comprehensive analytics and monitoring of student activity
 
 ## Tech Stack
 
@@ -148,9 +167,14 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 ### 5. Set Up Database Schema
 
 ```bash
+# Generate Prisma client
 npx prisma generate
+
+# Push schema to database (creates tables)
 npx prisma db push
 ```
+
+**Note**: If `prisma generate` fails with a file permission error on Windows, close all Node.js processes (including your dev server and VS Code), then try again.
 
 ### 6. Run the Development Server
 
@@ -188,13 +212,43 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - `POST /api/chats/create` - Create new chat
 - `GET /api/chats/list` - List user's chats
 - `GET /api/chats/[id]` - Get chat with messages
+- `PATCH /api/chats/[id]` - Update chat title
 - `DELETE /api/chats/[id]` - Delete chat
-- `POST /api/chats/[id]/messages` - Send message
+- `POST /api/chats/[id]/messages` - Send message (with optional file attachment)
+
+#### Courses
+- `POST /api/courses/create` - Create new course
+- `GET /api/courses/list` - List user's courses
+- `GET /api/courses/[id]` - Get course details
+- `PATCH /api/courses/[id]` - Update course
+- `DELETE /api/courses/[id]` - Delete course
+
+#### Schedules
+- `POST /api/schedules/create` - Create new schedule
+- `GET /api/schedules/list` - List schedules (with filters)
+- `GET /api/schedules/[id]` - Get schedule details
+- `PATCH /api/schedules/[id]` - Update schedule
+- `PATCH /api/schedules/[id]/toggle` - Toggle completion status
+- `DELETE /api/schedules/[id]` - Delete schedule
+
+#### Teacher
+- `GET /api/teacher/stats` - Get teacher dashboard statistics
 
 ## User Roles
 
-- **Student**: Can upload materials, create chats, and interact with AI
-- **Teacher**: Full access to monitor and analyze student engagement through a comprehensive dashboard, including real-time activity tracking, detailed student metrics, and complete oversight of all learning materials and conversations, while maintaining standard student capabilities.
+- **Student**:
+  - Upload and manage study materials
+  - Chat with AI assistant
+  - Manage courses and schedules
+  - Use focus mode for productivity
+  - Track assignments and exams
+
+- **Teacher**:
+  - All student capabilities
+  - Monitor student engagement through analytics dashboard
+  - Track real-time activity
+  - View detailed student metrics
+  - Oversight of learning materials and conversations
 
 ## Development
 
@@ -225,6 +279,37 @@ npx prisma studio
 - **Backend folder**: Contains all server-side logic (controllers, services, utilities)
 - **Frontend folder**: Contains all client-side code (components, pages, state)
 - **src/app**: Next.js routing layer - thin files that import from backend/frontend
+
+## Database Schema
+
+The application uses the following database models:
+
+- **User**: Stores user accounts (email, password, role)
+- **Material**: Uploaded study materials (PDFs, docs) with extracted text
+- **Chat**: Chat conversations between user and AI
+- **Message**: Individual messages within chats (supports file attachments)
+- **Course**: Student courses with details (name, code, instructor, color)
+- **Schedule**: Calendar events (classes, assignments, exams, tasks)
+
+**Enums**:
+- `UserRole`: STUDENT, TEACHER
+- `ScheduleType`: CLASS, ASSIGNMENT, EXAM, TASK, OTHER
+- `Priority`: LOW, MEDIUM, HIGH
+
+## Troubleshooting
+
+### Prisma Client Generation Error (Windows)
+If you get `EPERM: operation not permitted` error:
+1. Stop all Node.js processes (Ctrl+C in terminals)
+2. Close VS Code completely
+3. Delete `node_modules\.prisma` folder
+4. Run `npx prisma generate` again
+
+### Database Connection Error on Vercel
+Make sure to use **connection pooling** URL instead of direct connection:
+- Go to Supabase → Settings → Database → Connection pooling
+- Use port **6543** (not 5432)
+- Add `?pgbouncer=true` at the end
 
 ## License
 

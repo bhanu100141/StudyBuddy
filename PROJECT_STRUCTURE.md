@@ -11,28 +11,38 @@ studybuddy-ai/
 │   │   │   └── authController.ts      # Login & Register logic
 │   │   ├── chats/
 │   │   │   └── chatsController.ts     # Chat management logic
-│   │   └── materials/
-│   │       └── materialsController.ts # File upload logic
+│   │   ├── materials/
+│   │   │   └── materialsController.ts # File upload logic
+│   │   ├── courses/
+│   │   │   └── coursesController.ts   # Course management logic
+│   │   ├── schedules/
+│   │   │   └── schedulesController.ts # Schedule management logic
+│   │   └── teacher/
+│   │       └── teacherController.ts   # Teacher dashboard logic
 │   │
 │   └── lib/                           # Server utilities
 │       ├── prisma.ts                  # Database client
-│       ├── supabase.ts                # Storage client
+│       ├── supabase.ts                # Storage client (lazy-loaded)
 │       ├── jwt.ts                     # JWT token handling
 │       ├── auth.ts                    # Auth middleware
-│       ├── openai.ts                  # AI integration
+│       ├── gemini.ts                  # Google Gemini AI integration
 │       └── pdfParser.ts               # PDF text extraction
 │
 ├── 🎨 frontend/                        # FRONTEND CODE
 │   ├── components/                    # Reusable components
-│   │   ├── Sidebar.tsx               # Chat sidebar
-│   │   └── ChatInterface.tsx         # Chat UI
+│   │   ├── Sidebar.tsx               # Chat sidebar with navigation
+│   │   └── ChatInterface.tsx         # Chat UI with file upload
 │   │
 │   ├── pages/                        # Page components
 │   │   ├── HomePage.tsx              # Landing page
 │   │   ├── LoginPage.tsx             # Login page
 │   │   ├── SignupPage.tsx            # Signup page
-│   │   ├── DashboardPage.tsx         # Main dashboard
-│   │   └── MaterialsPage.tsx         # Materials management
+│   │   ├── DashboardPage.tsx         # Main student dashboard
+│   │   ├── MaterialsPage.tsx         # Materials management
+│   │   ├── CoursesPage.tsx           # Courses management
+│   │   ├── SchedulesPage.tsx         # Schedule & calendar management
+│   │   ├── FocusModePage.tsx         # Pomodoro focus timer
+│   │   └── TeacherDashboardPage.tsx  # Teacher analytics dashboard
 │   │
 │   ├── store/                        # State management
 │   │   └── authStore.ts              # Zustand auth store
@@ -49,27 +59,51 @@ studybuddy-ai/
 │   │   │   ├── create/route.ts      # Calls ChatsController.createChat()
 │   │   │   ├── list/route.ts        # Calls ChatsController.listChats()
 │   │   │   └── [id]/
-│   │   │       ├── route.ts         # Calls ChatsController.getChat()
+│   │   │       ├── route.ts         # Calls ChatsController.getChat/update/delete()
 │   │   │       └── messages/route.ts # Calls ChatsController.sendMessage()
-│   │   └── materials/
-│   │       ├── upload/route.ts      # Calls MaterialsController.uploadMaterial()
-│   │       ├── list/route.ts        # Calls MaterialsController.listMaterials()
-│   │       └── delete/[id]/route.ts # Calls MaterialsController.deleteMaterial()
+│   │   ├── materials/
+│   │   │   ├── upload/route.ts      # Calls MaterialsController.uploadMaterial()
+│   │   │   ├── list/route.ts        # Calls MaterialsController.listMaterials()
+│   │   │   └── delete/[id]/route.ts # Calls MaterialsController.deleteMaterial()
+│   │   ├── courses/
+│   │   │   ├── create/route.ts      # Calls CoursesController.createCourse()
+│   │   │   ├── list/route.ts        # Calls CoursesController.listCourses()
+│   │   │   └── [id]/route.ts        # Calls CoursesController (get/update/delete)
+│   │   ├── schedules/
+│   │   │   ├── create/route.ts      # Calls SchedulesController.createSchedule()
+│   │   │   ├── list/route.ts        # Calls SchedulesController.listSchedules()
+│   │   │   └── [id]/
+│   │   │       ├── route.ts         # Calls SchedulesController (get/update/delete)
+│   │   │       └── toggle/route.ts  # Calls SchedulesController.toggleComplete()
+│   │   └── teacher/
+│   │       └── stats/route.ts       # Calls TeacherController.getStats()
 │   │
 │   ├── (auth)/                      # Auth page routes
 │   │   ├── login/page.tsx          # Imports LoginPage component
 │   │   └── signup/page.tsx         # Imports SignupPage component
 │   │
-│   ├── dashboard/                   # Dashboard routes
+│   ├── dashboard/                   # Student dashboard routes
 │   │   ├── page.tsx                # Imports DashboardPage component
-│   │   └── materials/page.tsx      # Imports MaterialsPage component
+│   │   ├── materials/page.tsx      # Imports MaterialsPage component
+│   │   ├── courses/page.tsx        # Imports CoursesPage component
+│   │   ├── schedule/page.tsx       # Imports SchedulesPage component
+│   │   └── focus/page.tsx          # Imports FocusModePage component
+│   │
+│   ├── teacher-dashboard/          # Teacher dashboard route
+│   │   └── page.tsx                # Imports TeacherDashboardPage component
 │   │
 │   ├── layout.tsx                  # Root layout
 │   ├── page.tsx                    # Imports HomePage component
 │   └── globals.css                 # Imports from frontend/styles/
 │
 ├── 💾 prisma/                          # DATABASE
-│   └── schema.prisma               # Database schema (Users, Chats, Materials, Messages)
+│   └── schema.prisma               # Database schema:
+│                                    # - User (with UserRole enum)
+│                                    # - Material (uploaded files)
+│                                    # - Chat (conversations)
+│                                    # - Message (chat messages with attachments)
+│                                    # - Course (student courses)
+│                                    # - Schedule (calendar events with ScheduleType & Priority enums)
 │
 ├── 📄 Configuration Files
 │   ├── package.json                # Dependencies
