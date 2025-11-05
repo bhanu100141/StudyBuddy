@@ -264,7 +264,7 @@ export class ChatsController {
     const fileName = `${Date.now()}-${file.name}`;
     const filePath = `chat-attachments/${userId}/${chatId}/${fileName}`;
 
-    const { error: uploadError } = await supabaseAdmin.storage
+    const { error: uploadError } = await supabaseAdmin().storage
       .from('study-materials')
       .upload(filePath, buffer, {
         contentType: file.type,
@@ -276,7 +276,7 @@ export class ChatsController {
       throw new Error(`Failed to upload file: ${uploadError.message}`);
     }
 
-    const { data: { publicUrl } } = supabaseAdmin.storage
+    const { data: { publicUrl } } = supabaseAdmin().storage
       .from('study-materials')
       .getPublicUrl(filePath);
 

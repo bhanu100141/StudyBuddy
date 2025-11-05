@@ -35,7 +35,7 @@ export class MaterialsController {
     const fileName = `${Date.now()}-${file.name}`;
     const filePath = `materials/${userId}/${fileName}`;
 
-    const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
+    const { data: uploadData, error: uploadError } = await supabaseAdmin().storage
       .from('study-materials')
       .upload(filePath, buffer, {
         contentType: file.type,
@@ -48,7 +48,7 @@ export class MaterialsController {
       throw new Error(`Failed to upload file to storage: ${uploadError.message || uploadError}`);
     }
 
-    const { data: { publicUrl } } = supabaseAdmin.storage
+    const { data: { publicUrl } } = supabaseAdmin().storage
       .from('study-materials')
       .getPublicUrl(filePath);
 
