@@ -50,16 +50,26 @@ export default function SchedulesPage() {
   const [showModal, setShowModal] = useState(false);
   const [editingSchedule, setEditingSchedule] = useState<Schedule | null>(null);
   const [filterType, setFilterType] = useState<string>('ALL');
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    title: string;
+    description: string;
+    type: 'CLASS' | 'ASSIGNMENT' | 'EXAM' | 'TASK' | 'OTHER';
+    date: string;
+    startTime: string;
+    endTime: string;
+    location: string;
+    courseId: string;
+    priority: 'LOW' | 'MEDIUM' | 'HIGH';
+  }>({
     title: '',
     description: '',
-    type: 'OTHER' as const,
+    type: 'OTHER',
     date: '',
     startTime: '',
     endTime: '',
     location: '',
     courseId: '',
-    priority: 'MEDIUM' as const,
+    priority: 'MEDIUM',
   });
 
   useEffect(() => {
