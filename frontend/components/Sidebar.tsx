@@ -249,9 +249,27 @@ const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ currentChatId, onChatSel
       <div className="p-4 border-t border-gray-700 space-y-2">
         <button
           onClick={() => router.push('/dashboard/materials')}
-          className="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 rounded-lg transition text-sm"
+          className="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 rounded-lg transition text-sm flex items-center justify-center gap-2"
         >
           📁 My Materials
+        </button>
+        <button
+          onClick={() => router.push('/dashboard/courses')}
+          className="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 rounded-lg transition text-sm flex items-center justify-center gap-2"
+        >
+          📚 Courses
+        </button>
+        <button
+          onClick={() => router.push('/dashboard/schedule')}
+          className="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 rounded-lg transition text-sm flex items-center justify-center gap-2"
+        >
+          📅 Schedule
+        </button>
+        <button
+          onClick={() => router.push('/dashboard/focus')}
+          className="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 rounded-lg transition text-sm flex items-center justify-center gap-2"
+        >
+          🎯 Focus Mode
         </button>
         <button
           onClick={handleLogout}
