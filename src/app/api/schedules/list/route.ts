@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth } from '@/backend/lib/auth';
 import { SchedulesController } from '@/backend/controllers/schedules/schedulesController';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     const user = requireAuth(request);
