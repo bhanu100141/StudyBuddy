@@ -162,18 +162,18 @@ export default function CoursesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen dark:bg-slate-950 bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow">
+      <div className="dark:bg-slate-900 bg-white shadow border-b dark:border-slate-800 border-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">My Courses</h1>
-              <p className="mt-2 text-sm text-gray-600">Manage your courses and subjects</p>
+              <h1 className="text-3xl font-bold dark:text-white text-gray-900">My Courses</h1>
+              <p className="mt-2 text-sm dark:text-gray-400 text-gray-600">Manage your courses and subjects</p>
             </div>
             <button
               onClick={() => { router.back(); }}
-              className="text-gray-600 hover:text-gray-900 font-medium"
+              className="dark:text-gray-400 text-gray-600 dark:hover:text-white hover:text-gray-900 font-medium"
             >
               ← Back to Dashboard
             </button>
@@ -187,7 +187,7 @@ export default function CoursesPage() {
         <div className="mb-6">
           <button
             onClick={() => setShowModal(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition"
+            className="dark:bg-primary-600 bg-blue-600 dark:hover:bg-primary-700 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition"
           >
             <Plus className="w-5 h-5" />
             Add New Course
@@ -196,15 +196,15 @@ export default function CoursesPage() {
 
         {/* Courses Grid */}
         {loading ? (
-          <div className="text-center py-12 text-gray-600">Loading courses...</div>
+          <div className="text-center py-12 dark:text-gray-400 text-gray-600">Loading courses...</div>
         ) : courses.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-lg shadow">
-            <BookOpen className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No courses yet</h3>
-            <p className="text-gray-600 mb-4">Get started by adding your first course</p>
+          <div className="text-center py-12 dark:bg-slate-900 bg-white rounded-lg shadow dark:shadow-slate-800 border dark:border-slate-800 border-transparent">
+            <BookOpen className="w-16 h-16 mx-auto dark:text-gray-600 text-gray-400 mb-4" />
+            <h3 className="text-lg font-semibold dark:text-white text-gray-900 mb-2">No courses yet</h3>
+            <p className="dark:text-gray-400 text-gray-600 mb-4">Get started by adding your first course</p>
             <button
               onClick={() => setShowModal(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition"
+              className="dark:bg-primary-600 bg-blue-600 dark:hover:bg-primary-700 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition"
             >
               Add Course
             </button>
@@ -214,7 +214,7 @@ export default function CoursesPage() {
             {courses.map((course) => (
               <div
                 key={course.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
+                className="dark:bg-slate-900 bg-white rounded-lg shadow-md dark:shadow-slate-800 overflow-hidden hover:shadow-lg dark:hover:shadow-slate-700 transition border dark:border-slate-800 border-transparent"
               >
                 <div
                   className="h-3"
@@ -223,22 +223,22 @@ export default function CoursesPage() {
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900">{course.name}</h3>
+                      <h3 className="text-xl font-bold dark:text-white text-gray-900">{course.name}</h3>
                       {course.code && (
-                        <p className="text-sm text-gray-600 mt-1">{course.code}</p>
+                        <p className="text-sm dark:text-gray-400 text-gray-600 mt-1">{course.code}</p>
                       )}
                     </div>
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleEdit(course)}
-                        className="text-blue-600 hover:text-blue-700 p-1"
+                        className="dark:text-primary-400 text-blue-600 dark:hover:text-primary-500 hover:text-blue-700 p-1"
                         title="Edit course"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleDelete(course.id)}
-                        className="text-red-600 hover:text-red-700 p-1"
+                        className="dark:text-red-400 text-red-600 dark:hover:text-red-500 hover:text-red-700 p-1"
                         title="Delete course"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -247,25 +247,25 @@ export default function CoursesPage() {
                   </div>
 
                   {course.instructor && (
-                    <p className="text-sm text-gray-700 mb-2">
+                    <p className="text-sm dark:text-gray-300 text-gray-700 mb-2">
                       <span className="font-semibold">Instructor:</span> {course.instructor}
                     </p>
                   )}
 
-                  <div className="flex gap-3 text-sm text-gray-600 mb-3">
+                  <div className="flex gap-3 text-sm dark:text-gray-400 text-gray-600 mb-3">
                     {course.credits && (
-                      <span className="bg-gray-100 px-2 py-1 rounded">{course.credits} credits</span>
+                      <span className="dark:bg-slate-800 bg-gray-100 px-2 py-1 rounded">{course.credits} credits</span>
                     )}
                     {course.semester && (
-                      <span className="bg-gray-100 px-2 py-1 rounded">{course.semester}</span>
+                      <span className="dark:bg-slate-800 bg-gray-100 px-2 py-1 rounded">{course.semester}</span>
                     )}
                   </div>
 
                   {course.description && (
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-3">{course.description}</p>
+                    <p className="text-sm dark:text-gray-400 text-gray-600 line-clamp-2 mb-3">{course.description}</p>
                   )}
 
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm dark:text-gray-500 text-gray-500">
                     {course._count?.schedules || 0} scheduled items
                   </div>
                 </div>
@@ -277,16 +277,16 @@ export default function CoursesPage() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 dark:bg-black/70 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="dark:bg-slate-900 bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border dark:border-slate-800 border-transparent">
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold dark:text-white text-gray-900">
                   {editingCourse ? 'Edit Course' : 'Add New Course'}
                 </h2>
                 <button
                   onClick={closeModal}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="dark:text-gray-400 text-gray-400 dark:hover:text-gray-200 hover:text-gray-600"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -294,14 +294,14 @@ export default function CoursesPage() {
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                     Course Name *
                   </label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     placeholder="e.g., Introduction to Computer Science"
                     required
                   />
@@ -309,27 +309,27 @@ export default function CoursesPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                       Course Code
                     </label>
                     <input
                       type="text"
                       value={formData.code}
                       onChange={(e) => setFormData({ ...formData, code: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                       placeholder="e.g., CS101"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                       Instructor
                     </label>
                     <input
                       type="text"
                       value={formData.instructor}
                       onChange={(e) => setFormData({ ...formData, instructor: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                       placeholder="e.g., Dr. Smith"
                     />
                   </div>
@@ -337,35 +337,35 @@ export default function CoursesPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                       Credits
                     </label>
                     <input
                       type="number"
                       value={formData.credits}
                       onChange={(e) => setFormData({ ...formData, credits: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                       placeholder="e.g., 3"
                       min="0"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                       Semester
                     </label>
                     <input
                       type="text"
                       value={formData.semester}
                       onChange={(e) => setFormData({ ...formData, semester: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                       placeholder="e.g., Fall 2025"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                     Color
                   </label>
                   <div className="flex gap-2 flex-wrap">
@@ -376,8 +376,8 @@ export default function CoursesPage() {
                         onClick={() => setFormData({ ...formData, color })}
                         className={`w-10 h-10 rounded-lg border-2 transition ${
                           formData.color === color
-                            ? 'border-gray-900 scale-110'
-                            : 'border-transparent hover:border-gray-300'
+                            ? 'dark:border-white border-gray-900 scale-110'
+                            : 'border-transparent dark:hover:border-slate-600 hover:border-gray-300'
                         }`}
                         style={{ backgroundColor: color }}
                       />
@@ -386,13 +386,13 @@ export default function CoursesPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                     Description
                   </label>
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     rows={3}
                     placeholder="Optional course description..."
                   />
@@ -401,14 +401,14 @@ export default function CoursesPage() {
                 <div className="flex gap-3 pt-4">
                   <button
                     type="submit"
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition"
+                    className="flex-1 dark:bg-primary-600 bg-blue-600 dark:hover:bg-primary-700 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition"
                   >
                     {editingCourse ? 'Update Course' : 'Add Course'}
                   </button>
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="px-6 bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 rounded-lg font-semibold transition"
+                    className="px-6 dark:bg-slate-700 bg-gray-200 dark:hover:bg-slate-600 hover:bg-gray-300 dark:text-white text-gray-800 py-2 rounded-lg font-semibold transition"
                   >
                     Cancel
                   </button>

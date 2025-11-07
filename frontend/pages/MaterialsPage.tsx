@@ -95,18 +95,18 @@ export default function MaterialsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen dark:bg-slate-950 bg-gray-50">
       <div className="max-w-7xl mx-auto p-8">
         <div className="mb-8 flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">My Materials</h1>
-            <p className="text-gray-600 mt-2">
+            <h1 className="text-3xl font-bold dark:text-white text-gray-900">My Materials</h1>
+            <p className="dark:text-gray-400 text-gray-600 mt-2">
               Upload and manage your study materials
             </p>
           </div>
           <button
             onClick={() => router.push('/dashboard')}
-            className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition"
+            className="px-4 py-2 dark:bg-slate-700 bg-gray-600 text-white rounded-lg dark:hover:bg-slate-600 hover:bg-gray-700 transition"
           >
             ← Back to Chat
           </button>
@@ -124,33 +124,33 @@ export default function MaterialsPage() {
             />
             <label
               htmlFor="file-upload"
-              className={`cursor-pointer inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition ${
+              className={`cursor-pointer inline-flex items-center px-6 py-3 dark:bg-primary-600 bg-blue-600 text-white rounded-lg font-semibold dark:hover:bg-primary-700 hover:bg-blue-700 transition ${
                 uploading ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
               {uploading ? 'Uploading...' : '+ Upload Material'}
             </label>
           </label>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-sm dark:text-gray-400 text-gray-500 mt-2">
             Supported formats: PDF, TXT, DOCX (Max 10MB)
           </p>
         </div>
 
         {loading ? (
           <div className="text-center py-12">
-            <div className="text-gray-500">Loading materials...</div>
+            <div className="dark:text-gray-400 text-gray-500">Loading materials...</div>
           </div>
         ) : materials.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-lg border-2 border-dashed border-gray-300">
+          <div className="text-center py-12 dark:bg-slate-900 bg-white rounded-lg border-2 border-dashed dark:border-slate-700 border-gray-300">
             <div className="text-4xl mb-4">📁</div>
-            <p className="text-gray-500">No materials uploaded yet</p>
+            <p className="dark:text-gray-400 text-gray-500">No materials uploaded yet</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {materials.map((material) => (
               <div
                 key={material.id}
-                className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition"
+                className="dark:bg-slate-900 bg-white p-6 rounded-lg shadow dark:shadow-slate-800 hover:shadow-lg dark:hover:shadow-slate-700 transition border dark:border-slate-800 border-transparent"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="text-4xl">
@@ -162,15 +162,15 @@ export default function MaterialsPage() {
                   </div>
                   <button
                     onClick={() => handleDelete(material.id)}
-                    className="text-red-600 hover:text-red-700"
+                    className="dark:text-red-400 text-red-600 dark:hover:text-red-500 hover:text-red-700"
                   >
                     <Trash2 className="w-5 h-5" />
                   </button>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2 truncate">
+                <h3 className="font-semibold dark:text-white text-gray-900 mb-2 truncate">
                   {material.fileName}
                 </h3>
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-sm dark:text-gray-400 text-gray-500 mb-4">
                   {formatFileSize(material.fileSize)} •{' '}
                   {new Date(material.createdAt).toLocaleDateString()}
                 </p>
@@ -178,7 +178,7 @@ export default function MaterialsPage() {
                   href={material.fileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                  className="dark:text-primary-400 text-blue-600 dark:hover:text-primary-500 hover:text-blue-700 text-sm font-medium"
                 >
                   View File →
                 </a>

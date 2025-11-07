@@ -232,18 +232,18 @@ export default function SchedulesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen dark:bg-slate-950 bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow">
+      <div className="dark:bg-slate-900 bg-white shadow border-b dark:border-slate-800 border-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">My Schedule</h1>
-              <p className="mt-2 text-sm text-gray-600">Manage your classes, assignments, exams, and tasks</p>
+              <h1 className="text-3xl font-bold dark:text-white text-gray-900">My Schedule</h1>
+              <p className="mt-2 text-sm dark:text-gray-400 text-gray-600">Manage your classes, assignments, exams, and tasks</p>
             </div>
             <button
               onClick={() => { router.back(); }}
-              className="text-gray-600 hover:text-gray-900 font-medium"
+              className="dark:text-gray-400 text-gray-600 dark:hover:text-white hover:text-gray-900 font-medium"
             >
               ← Back to Dashboard
             </button>
@@ -257,9 +257,9 @@ export default function SchedulesPage() {
         <div className="mb-6 flex flex-col sm:flex-row gap-4">
           <button
             onClick={() => setShowModal(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition"
+            className="bg-blue-600  hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition"
           >
-            <Plus className="w-5 h-5" />
+            <Plus className="w-5 h-5 dark:text-white" />
             Add New Schedule
           </button>
 
@@ -267,7 +267,7 @@ export default function SchedulesPage() {
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 dark:bg-slate-800 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 dark:text-white dark:bg-gray-800"
           >
             <option value="ALL">All Types</option>
             <option value="CLASS">Classes</option>
@@ -279,16 +279,16 @@ export default function SchedulesPage() {
         </div>
 
         {loading ? (
-          <div className="text-center py-12 text-gray-600">Loading schedules...</div>
+          <div className="text-center dark:text-white py-12 text-gray-600">Loading schedules...</div>
         ) : (
           <div className="space-y-8">
             {/* Upcoming */}
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Upcoming</h2>
+              <h2 className="text-2xl font-bold dark:text-white text-gray-900 mb-4">Upcoming</h2>
               {upcomingSchedules.length === 0 ? (
-                <div className="bg-white rounded-lg shadow p-8 text-center">
-                  <Calendar className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-                  <p className="text-gray-600">No upcoming schedules</p>
+                <div className="bg-white dark:bg-slate-950 rounded-lg shadow p-8 text-center">
+                  <Calendar className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" />
+                  <p className="text-gray-600 dark:text-gray-400">No upcoming schedules</p>
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -308,8 +308,8 @@ export default function SchedulesPage() {
             {/* Completed */}
             {completedSchedules.length > 0 && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Completed</h2>
-                <div className="space-y-3">
+                <h2 className="text-2xl font-bold dark:text-white dark:bg-slate-950 text-gray-900 mb-4 dark:bg-slate-950">Completed</h2>
+                <div className="space-y-3 dark:bg-slate-950">
                   {completedSchedules.map((schedule) => (
                     <ScheduleCard
                       key={schedule.id}
@@ -328,26 +328,29 @@ export default function SchedulesPage() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 dark:bg-black/70 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="dark:bg-slate-900 bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border dark:border-slate-800 border-transparent">
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold dark:text-white text-gray-900">
                   {editingSchedule ? 'Edit Schedule' : 'Add New Schedule'}
                 </h2>
-                <button onClick={closeModal} className="text-gray-400 hover:text-gray-600">
+                <button 
+                  onClick={closeModal} 
+                  className="dark:text-gray-400 text-gray-400 dark:hover:text-gray-200 hover:text-gray-600"
+                >
                   <X className="w-6 h-6" />
                 </button>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">Title *</label>
                   <input
                     type="text"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     placeholder="e.g., Math 101 Class"
                     required
                   />
@@ -355,11 +358,11 @@ export default function SchedulesPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Type *</label>
+                    <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">Type *</label>
                     <select
                       value={formData.type}
                       onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     >
                       <option value="CLASS">Class</option>
                       <option value="ASSIGNMENT">Assignment</option>
@@ -370,11 +373,11 @@ export default function SchedulesPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                    <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">Priority</label>
                     <select
                       value={formData.priority}
                       onChange={(e) => setFormData({ ...formData, priority: e.target.value as any })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     >
                       <option value="LOW">Low</option>
                       <option value="MEDIUM">Medium</option>
@@ -384,11 +387,11 @@ export default function SchedulesPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Course (Optional)</label>
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">Course (Optional)</label>
                   <select
                     value={formData.courseId}
                     onChange={(e) => setFormData({ ...formData, courseId: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                   >
                     <option value="">None</option>
                     {courses.map((course) => (
@@ -401,54 +404,54 @@ export default function SchedulesPage() {
 
                 <div className="grid grid-cols-3 gap-4">
                   <div className="col-span-3 sm:col-span-1">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Date *</label>
+                    <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">Date *</label>
                     <input
                       type="date"
                       value={formData.date}
                       onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                       required
                     />
                   </div>
 
                   <div className="col-span-3 sm:col-span-1">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Start Time</label>
+                    <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">Start Time</label>
                     <input
                       type="time"
                       value={formData.startTime}
                       onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     />
                   </div>
 
                   <div className="col-span-3 sm:col-span-1">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">End Time</label>
+                    <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">End Time</label>
                     <input
                       type="time"
                       value={formData.endTime}
                       onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">Location</label>
                   <input
                     type="text"
                     value={formData.location}
                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     placeholder="e.g., Room 101"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">Description</label>
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     rows={3}
                     placeholder="Optional description..."
                   />
@@ -457,14 +460,14 @@ export default function SchedulesPage() {
                 <div className="flex gap-3 pt-4">
                   <button
                     type="submit"
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition"
+                    className="flex-1 dark:bg-primary-600 bg-blue-600 dark:hover:bg-primary-700 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition"
                   >
                     {editingSchedule ? 'Update Schedule' : 'Add Schedule'}
                   </button>
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="px-6 bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 rounded-lg font-semibold transition"
+                    className="px-6 dark:bg-slate-700 bg-gray-200 dark:hover:bg-slate-600 hover:bg-gray-300 dark:text-white text-gray-800 py-2 rounded-lg font-semibold transition"
                   >
                     Cancel
                   </button>
@@ -497,7 +500,7 @@ function ScheduleCard({
   });
 
   return (
-    <div className={`bg-white rounded-lg shadow p-4 hover:shadow-md transition ${schedule.isCompleted ? 'opacity-60' : ''}`}>
+    <div className={`bg-white dark:bg-slate-950 dark:border-white border-gray-200 rounded-lg shadow p-4 hover:shadow-md transition ${schedule.isCompleted ? 'opacity-60' : ''}`}>
       <div className="flex items-start gap-3">
         <button
           onClick={() => onToggleComplete(schedule.id)}
@@ -510,8 +513,8 @@ function ScheduleCard({
           )}
         </button>
 
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2 mb-2">
+        <div className="flex-1 min-w-0 dark:text-white">
+          <div className="flex flex-wrap items-center gap-2 dark:text-white mb-2">
             <h3 className={`font-bold text-lg ${schedule.isCompleted ? 'line-through text-gray-500' : 'text-gray-900'}`}>
               {schedule.title}
             </h3>
@@ -522,16 +525,16 @@ function ScheduleCard({
           </div>
 
           {schedule.course && (
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 dark:text-white mb-2">
               <span
                 className="w-3 h-3 rounded-full"
                 style={{ backgroundColor: schedule.course.color }}
               />
-              <span className="text-sm text-gray-600">{schedule.course.name}</span>
+              <span className="text-sm dark:text-white">{schedule.course.name}</span>
             </div>
           )}
 
-          <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-2">
+          <div className="flex flex-wrap gap-4 text-sm dark:text-white mb-2">
             <span className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />
               {formattedDate}
@@ -552,7 +555,7 @@ function ScheduleCard({
           </div>
 
           {schedule.description && (
-            <p className="text-sm text-gray-600">{schedule.description}</p>
+            <p className="text-sm dark:text-white">{schedule.description}</p>
           )}
         </div>
 

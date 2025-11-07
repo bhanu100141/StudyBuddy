@@ -128,7 +128,7 @@ export default function SignupPage() {
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-white">
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 dark:bg-slate-900 bg-white">
         <div className="max-w-md w-full space-y-8 animate-fade-in">
           {/* Logo */}
           <div className="text-center">
@@ -136,21 +136,21 @@ export default function SignupPage() {
               <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-teal-600 rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold text-2xl">SB</span>
               </div>
-              <span className="text-2xl font-bold gradient-text">Study Buddy AI</span>
+              <span className="text-2xl font-bold gradient-text dark:text-white">Study Buddy AI</span>
             </Link>
-            <h2 className="mt-6 text-3xl font-bold text-gray-900">
+            <h2 className="mt-6 text-3xl font-bold dark:text-white text-gray-900">
               Create your account
             </h2>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 dark:text-gray-400 text-gray-600">
               Start learning smarter in under 60 seconds
             </p>
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg animate-slide-up">
+            <div className="dark:bg-red-500/10 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg animate-slide-up">
               <div className="flex items-center">
-                <span className="text-red-700 text-sm">{error}</span>
+                <span className="dark:text-red-400 text-red-700 text-sm">{error}</span>
               </div>
             </div>
           )}
@@ -158,7 +158,7 @@ export default function SignupPage() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-2">
                 Full Name
               </label>
               <input
@@ -167,14 +167,14 @@ export default function SignupPage() {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="input-premium"
+                className="input-premium dark:bg-slate-800 dark:border-slate-700 dark:text-white"
                 placeholder="John Doe"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-2">
                 Email Address
               </label>
               <input
@@ -183,14 +183,14 @@ export default function SignupPage() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="input-premium"
+                className="input-premium dark:bg-slate-800 dark:border-slate-700 dark:text-white"
                 placeholder="you@example.com"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="role" className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-2">
                 I am a
               </label>
               <div className="grid grid-cols-2 gap-3">
@@ -199,8 +199,8 @@ export default function SignupPage() {
                   onClick={() => setFormData({ ...formData, role: 'STUDENT' })}
                   className={`py-3 px-4 rounded-xl border-2 font-medium transition-all ${
                     formData.role === 'STUDENT'
-                      ? 'border-primary-500 bg-primary-50 text-primary-700'
-                      : 'border-gray-200 hover:border-gray-300'
+                      ? 'border-primary-500 dark:bg-primary-500/20 bg-primary-50 text-primary-700 dark:text-primary-400'
+                      : 'dark:border-slate-700 border-gray-200 dark:hover:border-slate-600 hover:border-gray-300 dark:text-gray-300 text-gray-700'
                   }`}
                   disabled={loading}
                 >
@@ -211,8 +211,8 @@ export default function SignupPage() {
                   onClick={() => setFormData({ ...formData, role: 'TEACHER' })}
                   className={`py-3 px-4 rounded-xl border-2 font-medium transition-all ${
                     formData.role === 'TEACHER'
-                      ? 'border-primary-500 bg-primary-50 text-primary-700'
-                      : 'border-gray-200 hover:border-gray-300'
+                      ? 'border-primary-500 dark:bg-primary-500/20 bg-primary-50 text-primary-700 dark:text-primary-400'
+                      : 'dark:border-slate-700 border-gray-200 dark:hover:border-slate-600 hover:border-gray-300 dark:text-gray-300 text-gray-700'
                   }`}
                   disabled={loading}
                 >
@@ -222,7 +222,7 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-2">
                 Password
               </label>
               <input
@@ -231,14 +231,14 @@ export default function SignupPage() {
                 required
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="input-premium"
+                className="input-premium dark:bg-slate-800 dark:border-slate-700 dark:text-white"
                 placeholder="At least 6 characters"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-2">
                 Confirm Password
               </label>
               <input
@@ -247,7 +247,7 @@ export default function SignupPage() {
                 required
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                className="input-premium"
+                className="input-premium dark:bg-slate-800 dark:border-slate-700 dark:text-white"
                 placeholder="Confirm your password"
                 disabled={loading}
               />
@@ -261,13 +261,13 @@ export default function SignupPage() {
                 required
                 className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-1"
               />
-              <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="terms" className="ml-2 block text-sm dark:text-gray-300 text-gray-700">
                 I agree to the{' '}
-                <a href="#" className="text-primary-600 hover:text-primary-500">
+                <a href="#" className="text-primary-600 dark:text-primary-400 hover:text-primary-500">
                   Terms of Service
                 </a>{' '}
                 and{' '}
-                <a href="#" className="text-primary-600 hover:text-primary-500">
+                <a href="#" className="text-primary-600 dark:text-primary-400 hover:text-primary-500">
                   Privacy Policy
                 </a>
               </label>
@@ -292,9 +292,9 @@ export default function SignupPage() {
             </button>
 
             <div className="text-center">
-              <p className="text-sm text-gray-600">
+              <p className="text-sm dark:text-gray-400 text-gray-600">
                 Already have an account?{' '}
-                <Link href="/login" className="font-medium text-primary-600 hover:text-primary-500">
+                <Link href="/login" className="font-medium text-primary-600 dark:text-primary-400 hover:text-primary-500">
                   Sign in instead
                 </Link>
               </p>

@@ -215,18 +215,18 @@ export default function FocusModePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen dark:bg-gradient-to-br dark:from-slate-950 dark:to-slate-900 bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Header */}
-      <div className="bg-white shadow">
+      <div className="dark:bg-slate-900 bg-white shadow border-b dark:border-slate-800 border-transparent">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Focus Mode</h1>
-              <p className="mt-2 text-sm text-gray-600">Pomodoro timer to boost your productivity</p>
+              <h1 className="text-3xl font-bold dark:text-white text-gray-900">Focus Mode</h1>
+              <p className="mt-2 text-sm dark:text-gray-400 text-gray-600">Pomodoro timer to boost your productivity</p>
             </div>
             <button
               onClick={() => { router.back(); }}
-              className="text-gray-600 hover:text-gray-900 font-medium"
+              className="dark:text-gray-400 text-gray-600 dark:hover:text-white hover:text-gray-900 font-medium"
             >
               ← Back to Dashboard
             </button>
@@ -236,7 +236,7 @@ export default function FocusModePage() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12">
+        <div className="dark:bg-slate-900 bg-white rounded-2xl shadow-xl dark:shadow-slate-950 p-8 sm:p-12 border dark:border-slate-800 border-transparent">
           {/* Mode Tabs */}
           <div className="flex justify-center gap-4 mb-8 flex-wrap">
             <button
@@ -244,7 +244,7 @@ export default function FocusModePage() {
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 mode === 'focus'
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'dark:bg-slate-800 bg-gray-100 dark:text-gray-300 text-gray-700 dark:hover:bg-slate-700 hover:bg-gray-200'
               }`}
             >
               <Brain className="w-5 h-5 inline mr-2" />
@@ -255,7 +255,7 @@ export default function FocusModePage() {
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 mode === 'shortBreak'
                   ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'dark:bg-slate-800 bg-gray-100 dark:text-gray-300 text-gray-700 dark:hover:bg-slate-700 hover:bg-gray-200'
               }`}
             >
               <Coffee className="w-5 h-5 inline mr-2" />
@@ -266,7 +266,7 @@ export default function FocusModePage() {
               className={`px-6 py-3 rounded-lg font-semibold transition ${
                 mode === 'longBreak'
                   ? 'bg-purple-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'dark:bg-slate-800 bg-gray-100 dark:text-gray-300 text-gray-700 dark:hover:bg-slate-700 hover:bg-gray-200'
               }`}
             >
               <Coffee className="w-5 h-5 inline mr-2" />
@@ -311,7 +311,7 @@ export default function FocusModePage() {
                 <div className={`text-6xl sm:text-7xl font-bold ${getModeTextColor()}`}>
                   {formatTime(timeLeft)}
                 </div>
-                <div className="text-gray-500 text-lg mt-2 capitalize">{mode.replace(/([A-Z])/g, ' $1').trim()}</div>
+                <div className="dark:text-gray-400 text-gray-500 text-lg mt-2 capitalize">{mode.replace(/([A-Z])/g, ' $1').trim()}</div>
               </div>
             </div>
           </div>
@@ -337,7 +337,7 @@ export default function FocusModePage() {
 
             <button
               onClick={handleReset}
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-8 py-4 rounded-lg font-semibold flex items-center gap-2 transition"
+              className="dark:bg-slate-700 bg-gray-200 dark:hover:bg-slate-600 hover:bg-gray-300 dark:text-white text-gray-800 px-8 py-4 rounded-lg font-semibold flex items-center gap-2 transition"
             >
               <RotateCcw className="w-6 h-6" />
               Reset
@@ -345,7 +345,7 @@ export default function FocusModePage() {
 
             <button
               onClick={() => setShowSettings(true)}
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-8 py-4 rounded-lg font-semibold flex items-center gap-2 transition"
+              className="dark:bg-slate-700 bg-gray-200 dark:hover:bg-slate-600 hover:bg-gray-300 dark:text-white text-gray-800 px-8 py-4 rounded-lg font-semibold flex items-center gap-2 transition"
             >
               <Settings className="w-6 h-6" />
             </button>
@@ -353,10 +353,10 @@ export default function FocusModePage() {
 
           {/* Stats */}
           <div className="text-center">
-            <p className="text-gray-600 text-lg">
-              Focus sessions completed: <span className="font-bold text-gray-900">{sessionsCompleted}</span>
+            <p className="dark:text-gray-400 text-gray-600 text-lg">
+              Focus sessions completed: <span className="font-bold dark:text-white text-gray-900">{sessionsCompleted}</span>
             </p>
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="text-sm dark:text-gray-500 text-gray-500 mt-2">
               {sessionsCompleted > 0 && sessionsCompleted % settings.longBreakInterval === 0
                 ? 'Great job! Time for a long break'
                 : `${settings.longBreakInterval - (sessionsCompleted % settings.longBreakInterval)} more until long break`}
@@ -367,14 +367,14 @@ export default function FocusModePage() {
 
       {/* Settings Modal */}
       {showSettings && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
+        <div className="fixed inset-0 dark:bg-black/70 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="dark:bg-slate-900 bg-white rounded-lg shadow-xl max-w-md w-full border dark:border-slate-800 border-transparent">
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">Settings</h2>
+                <h2 className="text-2xl font-bold dark:text-white text-gray-900">Settings</h2>
                 <button
                   onClick={() => setShowSettings(false)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="dark:text-gray-400 text-gray-400 dark:hover:text-gray-200 hover:text-gray-600"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -382,60 +382,60 @@ export default function FocusModePage() {
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                     Focus Time (minutes)
                   </label>
                   <input
                     type="number"
                     value={settings.focusTime}
                     onChange={(e) => setSettings({ ...settings, focusTime: parseInt(e.target.value) || 25 })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     min="1"
                     max="60"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                     Short Break (minutes)
                   </label>
                   <input
                     type="number"
                     value={settings.shortBreakTime}
                     onChange={(e) => setSettings({ ...settings, shortBreakTime: parseInt(e.target.value) || 5 })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     min="1"
                     max="30"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                     Long Break (minutes)
                   </label>
                   <input
                     type="number"
                     value={settings.longBreakTime}
                     onChange={(e) => setSettings({ ...settings, longBreakTime: parseInt(e.target.value) || 15 })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     min="1"
                     max="60"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium dark:text-gray-300 text-gray-700 mb-1">
                     Long Break Interval
                   </label>
                   <input
                     type="number"
                     value={settings.longBreakInterval}
                     onChange={(e) => setSettings({ ...settings, longBreakInterval: parseInt(e.target.value) || 4 })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border dark:border-slate-700 border-gray-300 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-primary-500 focus:ring-blue-500 dark:bg-slate-800 bg-white dark:text-white text-gray-900"
                     min="1"
                     max="10"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Number of focus sessions before long break</p>
+                  <p className="text-xs dark:text-gray-500 text-gray-500 mt-1">Number of focus sessions before long break</p>
                 </div>
 
                 <div className="flex items-center">
@@ -444,9 +444,9 @@ export default function FocusModePage() {
                     id="autoStartBreaks"
                     checked={settings.autoStartBreaks}
                     onChange={(e) => setSettings({ ...settings, autoStartBreaks: e.target.checked })}
-                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    className="w-4 h-4 text-blue-600 dark:border-slate-600 border-gray-300 rounded focus:ring-blue-500"
                   />
-                  <label htmlFor="autoStartBreaks" className="ml-2 text-sm text-gray-700">
+                  <label htmlFor="autoStartBreaks" className="ml-2 text-sm dark:text-gray-300 text-gray-700">
                     Auto-start breaks
                   </label>
                 </div>
@@ -457,9 +457,9 @@ export default function FocusModePage() {
                     id="autoStartFocus"
                     checked={settings.autoStartFocus}
                     onChange={(e) => setSettings({ ...settings, autoStartFocus: e.target.checked })}
-                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    className="w-4 h-4 text-blue-600 dark:border-slate-600 border-gray-300 rounded focus:ring-blue-500"
                   />
-                  <label htmlFor="autoStartFocus" className="ml-2 text-sm text-gray-700">
+                  <label htmlFor="autoStartFocus" className="ml-2 text-sm dark:text-gray-300 text-gray-700">
                     Auto-start focus sessions
                   </label>
                 </div>
@@ -470,9 +470,9 @@ export default function FocusModePage() {
                     id="soundEnabled"
                     checked={settings.soundEnabled}
                     onChange={(e) => setSettings({ ...settings, soundEnabled: e.target.checked })}
-                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    className="w-4 h-4 text-blue-600 dark:border-slate-600 border-gray-300 rounded focus:ring-blue-500"
                   />
-                  <label htmlFor="soundEnabled" className="ml-2 text-sm text-gray-700">
+                  <label htmlFor="soundEnabled" className="ml-2 text-sm dark:text-gray-300 text-gray-700">
                     Play sound when timer ends
                   </label>
                 </div>
@@ -480,13 +480,13 @@ export default function FocusModePage() {
                 <div className="flex gap-3 pt-4">
                   <button
                     onClick={handleSaveSettings}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition"
+                    className="flex-1 dark:bg-primary-600 bg-blue-600 dark:hover:bg-primary-700 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition"
                   >
                     Save Settings
                   </button>
                   <button
                     onClick={() => setShowSettings(false)}
-                    className="px-6 bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 rounded-lg font-semibold transition"
+                    className="px-6 dark:bg-slate-700 bg-gray-200 dark:hover:bg-slate-600 hover:bg-gray-300 dark:text-white text-gray-800 py-2 rounded-lg font-semibold transition"
                   >
                     Cancel
                   </button>

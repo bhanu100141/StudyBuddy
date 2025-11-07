@@ -81,11 +81,11 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden relative">
+    <div className="flex h-screen overflow-hidden relative dark:bg-slate-950 bg-white">
       {/* Mobile overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+          className="fixed inset-0 dark:bg-black/50 bg-black/50 z-20 md:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
@@ -109,10 +109,10 @@ export default function DashboardPage() {
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden relative">
         {/* Mobile header with hamburger */}
-        <div className="md:hidden bg-gray-800 text-white p-4 flex items-center justify-between">
+        <div className="md:hidden dark:bg-slate-900 bg-gray-100 dark:text-white text-gray-900 p-4 flex items-center justify-between border-b dark:border-slate-800 border-gray-200">
           <button
             onClick={toggleSidebar}
-            className="p-2 hover:bg-gray-700 rounded-lg transition"
+            className="p-2 dark:hover:bg-slate-800 hover:bg-gray-200 rounded-lg transition"
             aria-label="Toggle sidebar"
           >
             <svg
@@ -136,7 +136,7 @@ export default function DashboardPage() {
         {/* Desktop collapse/expand button */}
         <button
           onClick={toggleDesktopCollapse}
-          className={`hidden md:flex fixed top-1/2 z-40 bg-gray-800 text-white p-2 rounded-r-lg shadow-lg hover:bg-gray-700 transition-all duration-300 items-center justify-center ${
+          className={`hidden md:flex fixed top-1/2 z-40 dark:bg-slate-800 bg-gray-200 dark:text-white text-gray-900 p-2 rounded-r-lg shadow-lg dark:hover:bg-slate-700 hover:bg-gray-300 transition-all duration-300 items-center justify-center ${
             isDesktopCollapsed ? 'left-0' : 'left-64 lg:left-72'
           }`}
           style={{

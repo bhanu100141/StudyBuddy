@@ -21,10 +21,18 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  chats     Chat[]
-  materials Material[]
-  courses   Course[]
-  schedules Schedule[]
+  chats              Chat[]
+  materials          Material[]
+  courses            Course[]
+  schedules          Schedule[]
+  assignmentsCreated Assignment[] @relation("TeacherAssignments")
+  assignmentsReceived Assignment[] @relation("StudentAssignments")
+  doubtsAsked        Doubt[]      @relation("StudentDoubts")
+  doubtsAnswered     Doubt[]      @relation("TeacherDoubts")
+  preferredDoubts    Doubt[]      @relation("PreferredTeacherDoubts")
+  meetingsRequested  MeetingRequest[] @relation("StudentMeetings")
+  meetingsHosted     MeetingRequest[] @relation("TeacherMeetings")
+  preferredMeetings  MeetingRequest[] @relation("PreferredTeacherMeetings")
 }
 
 model Material {
@@ -89,6 +97,39 @@ enum Priority {
   HIGH
 }
 
+enum AssignmentType {
+  TASK
+  EXAM
+  QUIZ
+  PROJECT
+}
+
+enum AssignmentStatus {
+  PENDING
+  SUBMITTED
+  GRADED
+  OVERDUE
+}
+
+enum DoubtStatus {
+  OPEN
+  ANSWERED
+  CLOSED
+}
+
+enum MeetingStatus {
+  REQUESTED
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum MeetingType {
+  DOUBT_CLARIFICATION
+  EXAM
+  DISCUSSION
+}
+
 model Course {
   id          String   @id @default(uuid())
   userId      String
@@ -130,4 +171,81 @@ model Schedule {
   @@index([userId])
   @@index([courseId])
   @@index([date])
+}
+
+model Assignment {
+  id          String           @id @default(uuid())
+  teacherId   String
+  studentId   String
+  title       String
+  description String           @db.Text
+  type        AssignmentType
+  status      AssignmentStatus @default(PENDING)
+  dueDate     DateTime
+  totalMarks  Int?
+  marksObtained Int?
+  submissionUrl String?
+  submissionText String?        @db.Text
+  feedback    String?          @db.Text
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  teacher     User             @relation("TeacherAssignments", fields: [teacherId], references: [id], onDelete: Cascade)
+  student     User             @relation("StudentAssignments", fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([teacherId])
+  @@index([studentId])
+  @@index([status])
+  @@index([dueDate])
+}
+
+model Doubt {
+  id          String      @id @default(uuid())
+  studentId   String
+  teacherId   String?
+  preferredTeacherId String?
+  subject     String
+  question    String      @db.Text
+  answer      String?     @db.Text
+  status      DoubtStatus @default(OPEN)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  student     User        @relation("StudentDoubts", fields: [studentId], references: [id], onDelete: Cascade)
+  teacher     User?       @relation("TeacherDoubts", fields: [teacherId], references: [id], onDelete: SetNull)
+  preferredTeacher User?   @relation("PreferredTeacherDoubts", fields: [preferredTeacherId], references: [id], onDelete: SetNull)
+  meetingRequest MeetingRequest?
+
+  @@index([studentId])
+  @@index([teacherId])
+  @@index([preferredTeacherId])
+  @@index([status])
+}
+
+model MeetingRequest {
+  id          String        @id @default(uuid())
+  studentId   String
+  teacherId   String?
+  preferredTeacherId String?
+  doubtId     String?       @unique
+  type        MeetingType
+  status      MeetingStatus @default(REQUESTED)
+  subject     String
+  description String        @db.Text
+  scheduledAt DateTime?
+  meetLink    String?
+  duration    Int?          // Duration in minutes
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  student     User          @relation("StudentMeetings", fields: [studentId], references: [id], onDelete: Cascade)
+  teacher     User?         @relation("TeacherMeetings", fields: [teacherId], references: [id], onDelete: SetNull)
+  preferredTeacher User?     @relation("PreferredTeacherMeetings", fields: [preferredTeacherId], references: [id], onDelete: SetNull)
+  doubt       Doubt?        @relation(fields: [doubtId], references: [id], onDelete: SetNull)
+
+  @@index([studentId])
+  @@index([teacherId])
+  @@index([preferredTeacherId])
+  @@index([status])
+  @@index([scheduledAt])
 }
